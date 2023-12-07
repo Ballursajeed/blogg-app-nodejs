@@ -1,2 +1,2 @@
-MONGO_URL = mongodb+srv://ballursajeed:Welcome7867@cluster0.nllcgum.mongodb.net/blog-app
-PORT=8000
+MONGO_URL=mongodb+srv://ballursajeed:Welcome7867@cluster0.nllcgum.mongodb.net/blog-app
+
