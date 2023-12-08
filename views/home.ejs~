@@ -5,7 +5,6 @@
   rel="stylesheet"
   integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
   crossorigin="anonymous">
-  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';">
 <meta charset="utf-8" />
  <link rel="icon" href="/favicon.ico" />
  <title>HomePage</title>
@@ -62,7 +61,7 @@
   <% blogs.forEach(blog => { %>
      <div class="col">
       <div class="card col " style="width: 18rem;">
-       <img src="<%= blog.coverImageURL %>" class="card-img-top" alt="..." height="400px" width="400px">
+       <img src="<%= blog.coverImageURL %>" class="card-img-top" alt="..." >
        <div class="card-body">
        <h5 class="card-title"><%= blog.title %></h5>
 
