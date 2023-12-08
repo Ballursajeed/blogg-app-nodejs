@@ -16,10 +16,7 @@ const app = express();
 const port = process.env.PORT || 8000;
 
  //mongoDB connection
-mongoose.connect(process.env.MONGO_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(process.env.MONGO_URL)
   .then(() => console.log("MongoDB connected!!!"))
   .catch((error) => console.error("MongoDB connection error:", error));
 
