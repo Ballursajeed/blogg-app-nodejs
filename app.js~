@@ -8,7 +8,6 @@ const { checkForAuthenticationCookie } = require("./middlewares/auth");
 
 
  const Blog = require("./models/blog");
- const User = require("./models/user");
 
  const userRoute = require("./routes/user");
  const blogRoute = require("./routes/blog");
@@ -31,13 +30,20 @@ app.set("views",path.join(__dirname, "views"));
  app.use(checkForAuthenticationCookie("token"));
  app.use(express.static(path.join(__dirname, "public")))
 
+// Content Security Policy Middleware
+/*app.use((req, res, next) => {
+ res.setHeader(
+    'Content-Security-Policy-Report-Only', "default-src 'self'; script-src 'self' https://code.jquery.com https://cdnjs.cloudflare.com https://stackpath.bootstrapcdn.com https://cdn.jsdelivr.net; style-src 'self' https://stackpath.bootstrapcdn.com https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; img-src 'self'; frame-src 'self'"
+  );
+
+  next();
+}); */
+
 app.get("/",async(req,res) =>{
 	const allBlogs = await Blog.find({});
-	const userName = await User.find({});
   res.render("home",{
         user: req.user,
         blogs: allBlogs,
-        userName: userName,
   });
 
 })

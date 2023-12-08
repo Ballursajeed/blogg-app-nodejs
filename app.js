@@ -30,6 +30,15 @@ app.set("views",path.join(__dirname, "views"));
  app.use(checkForAuthenticationCookie("token"));
  app.use(express.static(path.join(__dirname, "public")))
 
+// Content Security Policy Middleware
+app.use((req, res, next) => {
+  res.setHeader(
+    'Content-Security-Policy',
+    "default-src 'self' https://cdn.jsdelivr.net; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' https://cdn.jsdelivr.net; img-src 'self' data: https://cdn.jsdelivr.net; font-src 'self' https://cdn.jsdelivr.net; object-src 'none';"
+  );
+  next();
+});
+
 app.get("/",async(req,res) =>{
 	const allBlogs = await Blog.find({});
   res.render("home",{
