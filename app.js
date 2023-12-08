@@ -7,7 +7,7 @@ const { checkForAuthenticationCookie } = require("./middlewares/auth");
 
 
 
- const Blog = require("./models/blog")
+ const Blog = require("./models/blog");
 
  const userRoute = require("./routes/user");
  const blogRoute = require("./routes/blog");
@@ -36,6 +36,7 @@ app.get("/",async(req,res) =>{
         user: req.user,
         blogs: allBlogs,
   });
+
 })
 
 app.use("/user",userRoute);
