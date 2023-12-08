@@ -16,17 +16,22 @@ const app = express();
 const port = process.env.PORT || 8000;
 
  //mongoDB connection
- mongoose.connect(process.env.MONGO_URL)
- .then((e) => console.log("MongoDB connected!!!"));
+mongoose.connect(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => console.log("MongoDB connected!!!"))
+  .catch((error) => console.error("MongoDB connection error:", error));
+
 
 app.set("view engine","ejs");
-app.set("views",path.resolve("./views"));
+app.set("views",path.join(__dirname, "views"));
 
 //middleware
  app.use(express.urlencoded({ extended: false }));
  app.use(cookieParser());
  app.use(checkForAuthenticationCookie("token"));
- app.use(express.static(path.resolve("./public")))
+ app.use(express.static(path.join(__dirname, "public")))
 
 app.get("/",async(req,res) =>{
 	const allBlogs = await Blog.find({});
@@ -40,6 +45,6 @@ app.use("/user",userRoute);
 app.use("/blog",blogRoute);
 
 
-app.listen(port,() => console.log("Server is running on port: ",port));
+app.listen(port,"0.0.0.0",() => console.log("Server is running on port: ",port));
 
 
