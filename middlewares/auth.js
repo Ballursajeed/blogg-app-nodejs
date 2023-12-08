@@ -9,7 +9,11 @@ function checkForAuthenticationCookie(cookieName) {
      try {
      const userPayload = validateToken(tokenCookieValue);
      req.user = userPayload;
-     } catch (error) {}
+     } catch (error) {
+         console.error("Error validating token:", error);
+      // Handle the error, e.g., send an unauthorized response
+      return res.status(401).send("Unauthorized");
+     }
      return next();
 
  };
